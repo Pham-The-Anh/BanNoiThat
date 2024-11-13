@@ -1,0 +1,561 @@
+<!-- /*
+* Bootstrap 5
+* Tên mẫu: Furni
+* Tác giả mẫu: Untree.co
+* Đường dẫn mẫu: https://untree.co/
+* Giấy phép: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="vi">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Untree.co">
+	<link rel="shortcut icon" th:href="@{/images/favicon.png}">
+	<meta name="description" content=""/>
+	<meta name="keywords" content="bootstrap, bootstrap5"/>
+
+	<!-- Bootstrap CSS -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<link href="/css/tiny-slider.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+
+	<title>Furni - Nội thất và Thiết kế Nội thất</title>
+	</head>
+
+	<body>
+
+		<!-- Bắt đầu Phần Đầu/Điều Hướng -->
+		<nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Thanh điều hướng Furni">
+
+			<div class="container">
+				<a class="navbar-brand" th:href="@{index}">Furni<span>.</span></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Chuyển đổi điều hướng">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li class="nav-item active">
+							<a class="nav-link"  th:href="@{index}">Trang chủ</a>
+						</li>
+						<li><a class="nav-link" href="/shop1">Cửa hàng</a></li>
+						<li><a class="nav-link" href="about.html">Giới thiệu</a></li>
+						<li><a class="nav-link" href="services.html">Dịch vụ</a></li>
+						<li><a class="nav-link" href="blog.html">Blog</a></li>
+						<li><a class="nav-link" th:href="@{contact}">Liên hệ</a></li>
+					</ul>
+
+					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:if="${fullname != null}" th:text="'Xin Chào: ' + ${fullname}"></a>
+							<ul class="dropdown-menu" aria-labelledby="userDropdown">
+								<li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+							</ul>
+						</li>
+						<li class="nav-item" th:if="${fullnameObj == null}">
+							<a class="nav-link" href="/dangnhap">
+								<img src="images/user.svg" alt="Đăng nhập">
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/cart}">
+								<img src="images/cart.svg" alt="Giỏ hàng">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+				
+		</nav>
+		<!-- Kết thúc Phần Đầu/Điều Hướng -->
+
+		<!-- Bắt đầu Phần Hero -->
+			<div class="hero">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col-lg-5">
+							<div class="intro-excerpt">
+								<h1>Nội thất Hiện đại <span class="d-block">Studio Thiết kế</span></h1>
+								<p class="mb-4">Mang đến cho bạn các giải pháp thiết kế nội thất hiện đại, sáng tạo. Nâng tầm không gian sống của bạn với những sản phẩm độc đáo và chất lượng.</p>
+								<p><a href="" class="btn btn-secondary me-2">Mua ngay</a><a href="#" class="btn btn-white-outline">Khám phá</a></p>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="hero-img-wrap">
+								<img src="images/couch.png" class="img-fluid">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- Kết thúc Phần Hero -->
+
+		<!-- Bắt đầu Phần Sản Phẩm -->
+		<div class="product-section">
+			<div class="container">
+				<div class="row">
+
+					<!-- Bắt đầu Cột 1 -->
+					<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+						<h2 class="mb-4 section-title">Thiết kế từ chất liệu tuyệt vời.</h2>
+						<p class="mb-4">Chúng tôi tự hào mang đến những sản phẩm nội thất được làm từ chất liệu cao cấp, thiết kế tinh tế và hiện đại.</p>
+						<p><a href="shop.html" class="btn">Khám phá</a></p>
+					</div> 
+					<!-- Kết thúc Cột 1 -->
+
+					<!-- Bắt đầu Cột 2 -->
+					<div class="col-12 col-md-4 col-lg-3 mb-5" th:each="item :${page.content}">
+						<a class="product-item" th:href="@{/shop/{productID}(productID=${item.productID})}">
+							<img th:src="@{'/images/'+${item.image}}" class="img-fluid product-thumbnail">
+							<h3 class="product-title" th:text="${item.productName}"></h3>
+							<strong class="product-price" th:text="${item.formattedPrice}"></strong>
+							<span class="icon-cross">
+								<img src="images/cross.svg" class="img-fluid">
+							</span>
+						</a>
+
+					</div>
+
+					<!-- Kết thúc Cột 2 -->
+
+					<!-- Bắt đầu Cột 3 -->
+<!--					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">-->
+<!--						<a class="product-item" href="cart.html">-->
+<!--							<img src="images/product-2.png" class="img-fluid product-thumbnail">-->
+<!--							<h3 class="product-title">Ghế Kruzo Aero</h3>-->
+<!--							<strong class="product-price">$78.00</strong>-->
+
+<!--							<span class="icon-cross">-->
+<!--								<img src="images/cross.svg" class="img-fluid">-->
+<!--							</span>-->
+<!--						</a>-->
+<!--					</div>-->
+<!--					&lt;!&ndash; Kết thúc Cột 3 &ndash;&gt;-->
+
+<!--					&lt;!&ndash; Bắt đầu Cột 4 &ndash;&gt;-->
+<!--					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">-->
+<!--						<a class="product-item" href="cart.html">-->
+<!--							<img src="images/product-3.png" class="img-fluid product-thumbnail">-->
+<!--							<h3 class="product-title">Ghế Ergonomic</h3>-->
+<!--							<strong class="product-price">$43.00</strong>-->
+
+<!--							<span class="icon-cross">-->
+<!--								<img src="images/cross.svg" class="img-fluid">-->
+<!--							</span>-->
+<!--						</a>-->
+<!--					</div>-->
+					<!-- Kết thúc Cột 4 -->
+
+				</div>
+			</div>
+		</div>
+		<!-- Kết thúc Phần Sản Phẩm -->
+
+		<!-- Bắt đầu Phần Tại sao chọn chúng tôi -->
+		<div class="why-choose-section">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-6">
+						<h2 class="section-title">Tại sao chọn chúng tôi</h2>
+						<p>Chúng tôi cam kết mang đến chất lượng sản phẩm tốt nhất cùng với dịch vụ hậu mãi chu đáo. Khách hàng là trọng tâm của mọi hoạt động kinh doanh của chúng tôi.</p>
+
+						<div class="row my-5">
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="images/truck.svg" alt="Hình ảnh" class="img-fluid">
+									</div>
+									<h3>Giao hàng nhanh &amp; miễn phí</h3>
+									<p>Đảm bảo giao hàng nhanh chóng và hoàn toàn miễn phí cho mọi đơn hàng của bạn.</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="images/bag.svg" alt="Hình ảnh" class="img-fluid">
+									</div>
+									<h3>Dễ dàng mua sắm</h3>
+									<p>Trang web của chúng tôi được thiết kế để giúp bạn dễ dàng tìm kiếm và mua sắm các sản phẩm nội thất.</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="images/support.svg" alt="Hình ảnh" class="img-fluid">
+									</div>
+									<h3>Hỗ trợ 24/7</h3>
+									<p>Chúng tôi luôn sẵn sàng hỗ trợ bạn bất cứ lúc nào, bất kể ngày đêm.</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="images/return.svg" alt="Hình ảnh" class="img-fluid">
+									</div>
+									<h3>Đổi trả dễ dàng</h3>
+									<p>Chính sách đổi trả đơn giản và thuận tiện giúp bạn an tâm mua sắm.</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-lg-5">
+						<div class="img-wrap">
+							<img src="images/why-choose-us-img.jpg" alt="Hình ảnh" class="img-fluid">
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Kết thúc Phần Tại sao chọn chúng tôi -->
+
+		<!-- Phần tiếp tục sẽ được dịch theo phong cách tương tự -->
+		<!-- Bắt đầu Phần Chúng tôi giúp bạn -->
+		<div class="we-help-section">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-7 mb-5 mb-lg-0">
+						<div class="imgs-grid">
+							<div class="grid grid-1"><img src="images/img-grid-1.jpg" alt="Untree.co"></div>
+							<div class="grid grid-2"><img src="images/img-grid-2.jpg" alt="Untree.co"></div>
+							<div class="grid grid-3"><img src="images/img-grid-3.jpg" alt="Untree.co"></div>
+						</div>
+					</div>
+					<div class="col-lg-5 ps-lg-5">
+						<h2 class="section-title mb-4">Chúng tôi giúp bạn tạo nên thiết kế nội thất hiện đại</h2>
+						<p>Chúng tôi luôn sẵn sàng hỗ trợ bạn trong việc biến đổi không gian sống của mình với các thiết kế nội thất sáng tạo, tiện nghi và hiện đại.</p>
+
+						<ul class="list-unstyled custom-list my-4">
+							<li>Giải pháp thiết kế nội thất hiện đại</li>
+							<li>Tư vấn miễn phí và chuyên nghiệp</li>
+							<li>Sản phẩm chất lượng cao và bền đẹp</li>
+							<li>Giao hàng nhanh chóng và đảm bảo</li>
+						</ul>
+						<p><a href="#" class="btn">Khám phá</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Kết thúc Phần Chúng tôi giúp bạn -->
+
+		<!-- Bắt đầu Phần Sản phẩm phổ biến -->
+		<div class="popular-product">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+						<div class="product-item-sm d-flex">
+							<div class="thumbnail">
+								<img src="images/product-1.png" alt="Hình ảnh" class="img-fluid">
+							</div>
+							<div class="pt-3">
+								<h3>Ghế Nordic</h3>
+								<p>Ghế với thiết kế đơn giản, hiện đại phù hợp với mọi không gian sống.</p>
+								<p><a href="#">Xem thêm</a></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+						<div class="product-item-sm d-flex">
+							<div class="thumbnail">
+								<img src="images/product-2.png" alt="Hình ảnh" class="img-fluid">
+							</div>
+							<div class="pt-3">
+								<h3>Ghế Kruzo Aero</h3>
+								<p>Ghế thiết kế theo phong cách hiện đại, mang đến sự thoải mái tối đa.</p>
+								<p><a href="#">Xem thêm</a></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+						<div class="product-item-sm d-flex">
+							<div class="thumbnail">
+								<img src="images/product-3.png" alt="Hình ảnh" class="img-fluid">
+							</div>
+							<div class="pt-3">
+								<h3>Ghế Ergonomic</h3>
+								<p>Ghế được thiết kế theo tiêu chuẩn công thái học, giúp bạn thoải mái trong thời gian dài.</p>
+								<p><a href="#">Xem thêm</a></p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Kết thúc Phần Sản phẩm phổ biến -->
+
+		<!-- Bắt đầu Phần Lời chứng thực -->
+		<div class="testimonial-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7 mx-auto text-center">
+						<h2 class="section-title">Lời chứng thực</h2>
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-lg-12">
+						<div class="testimonial-slider-wrap text-center">
+
+							<div id="testimonial-nav">
+								<span class="prev" data-controls="prev"><span class="fa fa-chevron-left"></span></span>
+								<span class="next" data-controls="next"><span class="fa fa-chevron-right"></span></span>
+							</div>
+
+							<div class="testimonial-slider">
+								
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
+
+											<div class="testimonial-block text-center">
+												<blockquote class="mb-5">
+													<p>&ldquo;Thiết kế nội thất từ Furni đã thay đổi không gian sống của chúng tôi. Sản phẩm không chỉ đẹp mà còn rất bền và thoải mái.&rdquo;</p>
+												</blockquote>
+
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">Maria Jones</h3>
+													<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div> 
+								<!-- Kết thúc mục -->
+
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
+
+											<div class="testimonial-block text-center">
+												<blockquote class="mb-5">
+													<p>&ldquo;Dịch vụ khách hàng tuyệt vời và sản phẩm chất lượng cao. Chúng tôi rất hài lòng với trải nghiệm mua sắm tại Furni.&rdquo;</p>
+												</blockquote>
+
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">Maria Jones</h3>
+													<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div> 
+								<!-- Kết thúc mục -->
+
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
+
+											<div class="testimonial-block text-center">
+												<blockquote class="mb-5">
+													<p>&ldquo;Chất lượng sản phẩm tuyệt vời, chúng tôi chắc chắn sẽ quay lại mua sắm nhiều lần nữa.&rdquo;</p>
+												</blockquote>
+
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">Maria Jones</h3>
+													<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div> 
+								<!-- Kết thúc mục -->
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Kết thúc Phần Lời chứng thực -->
+
+		<!-- Bắt đầu Phần Blog -->
+		<div class="blog-section">
+			<div class="container">
+				<div class="row mb-5">
+					<div class="col-md-6">
+						<h2 class="section-title">Blog gần đây</h2>
+					</div>
+					<div class="col-md-6 text-start text-md-end">
+						<a href="#" class="more">Xem tất cả các bài viết</a>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+						<div class="post-entry">
+							<a href="#" class="post-thumbnail"><img src="images/post-1.jpg" alt="Hình ảnh" class="img-fluid"></a>
+							<div class="post-content-entry">
+								<h3><a href="#">Ý tưởng cho người mua nhà lần đầu</a></h3>
+								<div class="meta">
+									<span>tác giả <a href="#">Kristin Watson</a></span> <span>vào <a href="#">Dec 19, 2021</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+						<div class="post-entry">
+							<a href="#" class="post-thumbnail"><img src="images/post-2.jpg" alt="Hình ảnh" class="img-fluid"></a>
+							<div class="post-content-entry">
+								<h3><a href="#">Cách giữ cho nội thất luôn sạch sẽ</a></h3>
+								<div class="meta">
+									<span>tác giả <a href="#">Robert Fox</a></span> <span>vào <a href="#">Dec 15, 2021</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+						<div class="post-entry">
+							<a href="#" class="post-thumbnail"><img src="images/post-3.jpg" alt="Hình ảnh" class="img-fluid"></a>
+							<div class="post-content-entry">
+								<h3><a href="#">Ý tưởng cho căn hộ nhỏ</a></h3>
+								<div class="meta">
+									<span>tác giả <a href="#">Kristin Watson</a></span> <span>vào <a href="#">Dec 12, 2021</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Kết thúc Phần Blog -->	
+
+		<!-- Bắt đầu Phần Chân Trang -->
+		<footer class="footer-section">
+			<div class="container relative">
+
+				<div class="sofa-img">
+					<img src="images/sofa.png" alt="Hình ảnh" class="img-fluid">
+				</div>
+
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="subscription-form">
+							<h3 class="d-flex align-items-center"><span class="me-1"><img src="images/envelope-outline.svg" alt="Hình ảnh" class="img-fluid"></span><span>Đăng ký nhận tin</span></h3>
+
+							<form action="#" class="row g-3">
+								<div class="col-auto">
+									<input type="text" class="form-control" placeholder="Nhập tên của bạn">
+								</div>
+								<div class="col-auto">
+									<input type="email" class="form-control" placeholder="Nhập email của bạn">
+								</div>
+								<div class="col-auto">
+									<button class="btn btn-primary">
+										<span class="fa fa-paper-plane"></span>
+									</button>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="row g-5 mb-5">
+					<div class="col-lg-4">
+						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Furni<span>.</span></a></div>
+						<p class="mb-4">Mang lại phong cách sống hiện đại và tiện nghi với các sản phẩm nội thất chất lượng từ Furni.</p>
+
+						<ul class="list-unstyled custom-social">
+							<li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+						</ul>
+					</div>
+
+					<div class="col-lg-8">
+						<div class="row links-wrap">
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="#">Giới thiệu</a></li>
+									<li><a href="#">Dịch vụ</a></li>
+									<li><a href="#">Blog</a></li>
+									<li><a href="#">Liên hệ</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="#">Hỗ trợ</a></li>
+									<li><a href="#">Cơ sở kiến thức</a></li>
+									<li><a href="#">Trò chuyện trực tiếp</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="#">Tuyển dụng</a></li>
+									<li><a href="#">Đội ngũ của chúng tôi</a></li>
+									<li><a href="#">Lãnh đạo</a></li>
+									<li><a href="#">Chính sách quyền riêng tư</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="#">Ghế Nordic</a></li>
+									<li><a href="#">Kruzo Aero</a></li>
+									<li><a href="#">Ghế Ergonomic</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="border-top copyright">
+					<div class="row pt-4">
+						<div class="col-lg-6">
+							<p class="mb-2 text-center text-lg-start">Bản quyền &copy;<script>document.write(new Date().getFullYear());</script>. Tất cả các quyền được bảo lưu. &mdash; Thiết kế với tình yêu bởi <a href="https://untree.co">Untree.co</a> Phân phối bởi <a href="https://themewagon.com">ThemeWagon</a></p>
+						</div>
+
+						<div class="col-lg-6 text-center text-lg-end">
+							<ul class="list-unstyled d-inline-flex ms-auto">
+								<li class="me-4"><a href="#">Điều khoản &amp; Điều kiện</a></li>
+								<li><a href="#">Chính sách quyền riêng tư</a></li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</footer>
+		<!-- Kết thúc Phần Chân Trang -->
+
+
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/tiny-slider.js"></script>
+		<script src="js/custom.js"></script>
+	</body>
+
+</html>

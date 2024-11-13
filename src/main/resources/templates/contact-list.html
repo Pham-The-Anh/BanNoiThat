@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Contacts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Đổi màu nền toàn bộ trang */
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #00796b; /* Đổi màu cho tiêu đề */
+        }
+
+        /* Định dạng bảng */
+        .table {
+            margin-top: 20px;
+            background-color: #ffffff; /* Màu nền bảng */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        /* Hiệu ứng phát sáng và ngả bóng khi rê chuột vào bảng */
+        .table:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        thead {
+            background-color: #00796b; /* Màu nền cho phần tiêu đề bảng */
+            color: white;
+        }
+
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #dee2e6;
+        }
+
+        /* Hiệu ứng rê chuột qua từng hàng */
+        tbody tr {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        tbody tr:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hiệu ứng phát sáng cho nút */
+        .btn-primary {
+            background-color: #388e3c; /* Màu nền cho nút */
+            border-color: #388e3c;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #2e7d32;
+            border-color: #2e7d32;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);  /* Phóng to nhẹ khi rê chuột qua */
+        }
+
+        /* Đổi màu nền cho container */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #ffffff; /* Nền của phần chứa nội dung */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Định dạng cho thông báo */
+        .alert {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container" th:fragment="lienhe">
+    <h1>Manage Contacts</h1>
+
+    <!-- Table for Unchecked Contacts -->
+    <h2>Unchecked Contacts</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contact : ${contacts}" th:if="${!contact.status}">
+            <td th:text="${contact.id}"></td>
+            <td th:text="${contact.account.email}"></td>
+            <td th:text="${contact.account != null ? contact.account.fullname : 'N/A'}"></td>
+            <td th:text="${contact.phone}"></td>
+            <td th:text="${contact.message}"></td>
+            <td th:text="${contact.status != null ? (contact.status ? 'Checked' : 'Unchecked') : 'Unknown'}"></td>
+            <td>
+                <form th:action="@{/admin/update-status/{id}(id=${contact.id})}" method="post">
+                    <button type="submit" class="btn btn-primary" th:disabled="${contact.status}">Mark as Checked</button>
+                </form>
+            </td>
+            <td>
+                <!-- Form gửi email với dữ liệu từ contact -->
+                <form th:action="@{/email(toEmail=${contact.account.email})}" method="post">
+                    <button type="submit" class="btn btn-primary" th:disabled="${contact.status}">Gửi liên hệ</button>
+                </form>
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <!-- Table for Checked Contacts -->
+    <h2>Checked Contacts</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Message</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contact : ${contacts}" th:if="${contact.status}">
+            <td th:text="${contact.id}"></td>
+            <td th:text="${contact.account.email}"></td>
+            <td th:text="${contact.account.fullname}"></td>
+            <td th:text="${contact.phone}"></td>
+            <td th:text="${contact.message}"></td>
+            <td th:text="${contact.status ? 'Checked' : 'Unchecked'}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Import Bootstrap JS (tùy chọn nếu cần dùng) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

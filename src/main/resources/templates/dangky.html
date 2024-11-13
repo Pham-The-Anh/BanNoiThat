@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="favicon.png">
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap5" />
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <title>Đăng Ký - Furni</title>
+</head>
+
+<body>
+
+  <!-- Bắt đầu Phần Đầu/Điều Hướng -->
+  <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Thanh điều hướng Furni">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Furni<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Chuyển đổi điều hướng">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsFurni">
+        <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+          <li class="nav-item active"><a class="nav-link" href="index.html">Trang chủ</a></li>
+          <li><a class="nav-link" href="shop.html">Cửa hàng</a></li>
+          <li><a class="nav-link" href="about.html">Giới thiệu</a></li>
+          <li><a class="nav-link" href="services.html">Dịch vụ</a></li>
+          <li><a class="nav-link" href="blog.html">Blog</a></li>
+          <li><a class="nav-link" href="contact.html">Liên hệ</a></li>
+        </ul>
+        <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+            <li><a class="nav-link" href="dangnhap.html"><img src="images/user.svg"></a></li>
+            <li><a class="nav-link" href="cart.html"><img src="images/cart.svg"></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Kết thúc Phần Đầu/Điều Hướng -->
+
+  <div class="container my-5">
+      <h2 class="text-center mb-4">Đăng Ký Tài Khoản</h2>
+      <form action="/dangky" method="POST" th:object="${account}">
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="mb-3">
+                      <label for="fullname" class="form-label">Tên đầy đủ</label>
+                      <input type="text" name="fullname" class="form-control" id="fullname"
+                             placeholder="Nhập tên đầy đủ" required maxlength="100"
+                             th:value="*{fullname}"> <!-- Giữ giá trị đã nhập -->
+                  </div>
+                  <div class="mb-3">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" name="email" class="form-control" id="email"
+                             placeholder="Nhập email" required maxlength="100"
+                             th:value="*{email}"> <!-- Giữ giá trị đã nhập -->
+                  </div>
+                  <div class="mb-3">
+                      <label for="phone" class="form-label">Số điện thoại</label>
+                      <input type="text" name="phone" class="form-control" id="phone"
+                             placeholder="Nhập số điện thoại" maxlength="20"
+                             th:value="*{phone}"> <!-- Giữ giá trị đã nhập -->
+                  </div>
+                  <div class="mb-3">
+                      <label for="address" class="form-label">Địa chỉ</label>
+                      <input type="text" name="address" class="form-control" id="address"
+                             placeholder="Nhập địa chỉ" maxlength="255"
+                             th:value="*{address}"> <!-- Giữ giá trị đã nhập -->
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="mb-3">
+                      <label for="city" class="form-label">Thành phố</label>
+                      <input type="text" name="city" class="form-control" id="city"
+                             placeholder="Nhập thành phố" maxlength="100"
+                             th:value="*{city}"> <!-- Giữ giá trị đã nhập -->
+                  </div>
+                  <div class="mb-3">
+                      <label for="country" class="form-label">Quốc gia</label>
+                      <input type="text" name="country" class="form-control" id="country"
+                             placeholder="Nhập quốc gia" maxlength="100"
+                             th:value="*{country}"> <!-- Giữ giá trị đã nhập -->
+                  </div>
+                  <div class="mb-3">
+                      <label class="form-label">Giới tính</label>
+                      <div>
+                          <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Nam"
+                                     th:checked="*{gender == 'Nam'}">
+                              <label class="form-check-label" for="genderMale">Nam</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Nữ"
+                                     th:checked="*{gender == 'Nữ'}">
+                              <label class="form-check-label" for="genderFemale">Nữ</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="gender" id="genderOther" value="Khác"
+                                     th:checked="*{gender == 'Khác'}">
+                              <label class="form-check-label" for="genderOther">Khác</label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="mb-3">
+                      <label for="password" class="form-label">Mật khẩu</label>
+                      <input type="password" name="password" class="form-control" id="password"
+                             placeholder="Nhập mật khẩu" required maxlength="255">
+                  </div>
+                  <div class="mb-3">
+                      <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                      <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"
+                             placeholder="Xác nhận mật khẩu" required maxlength="255">
+                  </div>
+                  <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="admin" name="admin" value="true">
+                      <label class="form-check-label" for="admin">Tôi đồng ý với các điều khoản!</label>
+                  </div>
+                  <div class="text-danger mb-3">
+                      <span th:if="${error}" th:text="${error}"></span>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Đăng Ký</button>
+              </div>
+          </div>
+      </form>
+      <div class="text-success mb-3">
+          <span th:if="${message}" th:text="${message}"></span>
+      </div>
+      <!-- Nút quay trở lại trang đăng nhập -->
+      <div class="mt-4">
+          <a href="/dangnhap" class="btn btn-secondary">Quay lại trang đăng nhập</a>
+      </div>
+  </div>
+
+
+
+
+
+
+
+  <!-- Bắt đầu Phần Chân Trang -->
+     <footer class="footer-section">
+        <div class="container relative">
+
+            <div class="sofa-img">
+                <img src="images/sofa.png" alt="Hình ảnh" class="img-fluid">
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="subscription-form">
+                        <h3 class="d-flex align-items-center"><span class="me-1"><img src="images/envelope-outline.svg" alt="Hình ảnh" class="img-fluid"></span><span>Đăng ký nhận tin</span></h3>
+
+                        <form action="#" class="row g-3">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" placeholder="Nhập tên của bạn">
+                            </div>
+                            <div class="col-auto">
+                                <input type="email" class="form-control" placeholder="Nhập email của bạn">
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary">
+                                    <span class="fa fa-paper-plane"></span>
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Furni<span>.</span></a></div>
+                    <p class="mb-4">Mang lại phong cách sống hiện đại và tiện nghi với các sản phẩm nội thất chất lượng từ Furni.</p>
+
+                    <ul class="list-unstyled custom-social">
+                        <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+                        <li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+                        <li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+                        <li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="row links-wrap">
+                        <div class="col-6 col-sm-6 col-md-3">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Giới thiệu</a></li>
+                                <li><a href="#">Dịch vụ</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Liên hệ</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-6 col-sm-6 col-md-3">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Hỗ trợ</a></li>
+                                <li><a href="#">Cơ sở kiến thức</a></li>
+                                <li><a href="#">Trò chuyện trực tiếp</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-6 col-sm-6 col-md-3">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Tuyển dụng</a></li>
+                                <li><a href="#">Đội ngũ của chúng tôi</a></li>
+                                <li><a href="#">Lãnh đạo</a></li>
+                                <li><a href="#">Chính sách quyền riêng tư</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-6 col-sm-6 col-md-3">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Ghế Nordic</a></li>
+                                <li><a href="#">Kruzo Aero</a></li>
+                                <li><a href="#">Ghế Ergonomic</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-top copyright">
+                <div class="row pt-4">
+                    <div class="col-lg-6">
+                        <p class="mb-2 text-center text-lg-start">Bản quyền &copy;<script>document.write(new Date().getFullYear());</script>. Tất cả các quyền được bảo lưu. &mdash; Thiết kế với tình yêu bởi <a href="https://untree.co">Untree.co</a> Phân phối bởi <a href="https://themewagon.com">ThemeWagon</a></p>
+                    </div>
+
+                    <div class="col-lg-6 text-center text-lg-end">
+                        <ul class="list-unstyled d-inline-flex ms-auto">
+                            <li class="me-4"><a href="#">Điều khoản &amp; Điều kiện</a></li>
+                            <li><a href="#">Chính sách quyền riêng tư</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <!-- Kết thúc Phần Chân Trang -->
+
+
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

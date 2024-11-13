@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách người dùng</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:fragment="userList" class="container mt-5"> <!-- Đặt tên cho fragment -->
+    <h2>Danh sách người dùng</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Họ và tên</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Thành phố</th>
+            <th>Quốc gia</th>
+            <th>Giới tính</th>
+            <th>Vai trò</th>
+            <th>Mật khẩu</th> <!-- Hiển thị mật khẩu -->
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="account : ${accounts}">
+            <td th:text="${account.email}"></td>
+            <td th:text="${account.fullname}"></td>
+            <td th:text="${account.phone}"></td>
+            <td th:text="${account.address}"></td>
+            <td th:text="${account.city}"></td>
+            <td th:text="${account.country}"></td>
+            <td th:text="${account.gender}"></td>
+            <td th:text="${account.admin ? 'Admin' : 'User'}"></td>
+            <td th:text="${account.password}"></td> <!-- Hiển thị mật khẩu -->
+            <td>
+                <a th:href="@{/edit/{id}(id=${account.email})}" class="btn btn-warning btn-sm">Sửa</a>
+                <a th:href="@{/delete/{id}(id=${account.email})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(accounts)}">
+            <td colspan="10">Không có người dùng nào.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

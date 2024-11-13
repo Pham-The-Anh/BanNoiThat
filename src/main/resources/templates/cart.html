@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="../static/images/favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="css/tiny-slider.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <title>Mẫu miễn phí Bootstrap 5 cho Website Nội Thất bởi Untree.co</title>
+</head>
+
+<body>
+
+  <!-- Bắt đầu Header/Navigation -->
+  <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Thanh điều hướng Furni">
+
+      <div class="container">
+          <a class="navbar-brand" th:href="@{index}">Furni<span>.</span></a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Chuyển đổi điều hướng">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarsFurni">
+              <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                  <li class="nav-item active">
+                      <a class="nav-link"  th:href="@{index}">Trang chủ</a>
+                  </li>
+                  <li><a class="nav-link" href="/shop1">Cửa hàng</a></li>
+                  <li><a class="nav-link" href="about.html">Giới thiệu</a></li>
+                  <li><a class="nav-link" href="services.html">Dịch vụ</a></li>
+                  <li><a class="nav-link" href="blog.html">Blog</a></li>
+                  <li><a class="nav-link" th:href="@{contact}">Liên hệ</a></li>
+              </ul>
+
+              <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:if="${fullname != null}" th:text="'Xin Chào: ' + ${fullname}"></a>
+                      <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                          <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                      </ul>
+                  </li>
+                  <li class="nav-item" th:if="${fullnameObj == null}">
+                      <a class="nav-link" href="/dangnhap">
+                          <img th:src="@{/images/user.svg}" alt="User Image">
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" th:href="@{/cart}">
+                          <img src="images/cart.svg" alt="Giỏ hàng">
+                      </a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+
+  </nav>
+  <!-- Kết thúc Header/Navigation -->
+
+  <!-- Bắt đầu phần Hero -->
+  <div class="hero">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-lg-5">
+          <div class="intro-excerpt">
+            <h1>Giỏ hàng</h1>
+          </div>
+        </div>
+        <div class="col-lg-7"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Kết thúc phần Hero -->
+  <form th:action="@{/cart/update}" method="post" >
+  <div class="untree_co-section before-footer-section">
+      <div class="container">
+          <div class="row mb-5">
+              <form class="col-md-12"> <!-- Đặt form bao toàn bộ phần giỏ hàng -->
+                  <div class="site-blocks-table">
+                      <table class="table">
+                          <thead>
+                          <tr>
+                              <th class="product-thumbnail">Hình ảnh</th>
+                              <th class="product-name">Sản phẩm</th>
+                              <th class="product-price">Giá</th>
+                              <th class="product-quantity">Số lượng</th> <!-- Sửa lại cột số lượng -->
+
+                              <th class="product-remove">Xóa</th>
+                          </tr>
+                          </thead>
+                          <tbody th:if="${cartItems}">
+                          <tr  th:each="cart : ${cartItems}">
+                              <td class="product-thumbnail">
+                                  <img th:src="@{'/images/' + ${cart.product.image}}" alt="Hình ảnh" class="img-fluid">
+                              </td>
+                              <td class="product-name">
+                                  <h2 class="h5 text-black" th:text="${cart.product.productName}"></h2>
+                              </td>
+                              <td th:text="${cart.product.formattedPrice}"> </td>
+                              <td> <!-- Cập nhật số lượng -->
+                                  <input type="hidden" name="cartItemId" th:value="${cart.id}">
+                                  <input type="number" name="quantity" min="1" th:value="${cart.quantity}" class="form-control" />
+                              </td>
+                              <td>
+                                  <h4><span class="text-black-50" ></span></h4> <!-- Hiển thị tổng tiền cho mỗi sản phẩm -->
+                              </td>
+                              <td>
+                                  <a th:href="@{/cart/remove/{id}(id=${cart.id})}" class="btn btn-danger btn-sm">Xóa</a>
+                              </td>
+                          </tr>
+                          </tbody>
+                          <tr th:if="${#lists.isEmpty(cartItems)}">
+                              <td colspan="6" class="text-center">Giỏ hàng trống</td>
+                          </tr>
+                      </table>
+                  </div>
+                  <!-- Thêm nút Cập nhật toàn bộ giỏ hàng -->
+<!--                  <button type="submit" class="btn btn-black btn-sm btn-block col-3">Cập nhật giỏ hàng</button>-->
+                  <div class="col-md-6">
+                      <div class="row mb-5">
+                          <div class="col-md-6 mb-3 mb-md-0">
+                              <form method="post"   >
+                                  <button class="btn btn-black btn-sm btn-block">Cập nhật giỏ hàng</button>
+                              </form>
+                          </div>
+                          <div class="col-md-6">
+                              <button class="btn btn-outline-black btn-sm btn-block">Tiếp tục mua sắm</button>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-12">
+                              <label class="text-black h4" for="coupon">Mã giảm giá</label>
+                              <p>Nhập mã giảm giá nếu bạn có.</p>
+                          </div>
+                          <div class="col-md-8 mb-3 mb-md-0">
+                              <input type="text" class="form-control py-3" id="coupon" placeholder="Mã giảm giá">
+                          </div>
+                          <div class="col-md-4">
+                              <button class="btn btn-black">Áp dụng mã</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 pl-5">
+                      <div class="row justify-content-end">
+                          <div class="col-md-7">
+                              <div class="row">
+                                  <div class="col-md-12 text-right border-bottom mb-5">
+                                      <h3 class="text-black h4 text-uppercase">Tổng giỏ hàng</h3>
+                                  </div>
+                              </div>
+
+                              <div class="row mb-3">
+                                  <div class="col-md-6">
+                                      <span class="text-black">Tổng phụ</span>
+                                  </div>
+                                  <div class="col-md-6 text-right">
+                                      <strong class="text-black">0đ</strong>
+                                  </div>
+                              </div>
+
+                              <div class="row mb-5">
+                                  <div class="col-md-6">
+                                      <span class="text-black">Tổng cộng</span>
+                                  </div>
+                                  <div class="col-md-6 text-right">
+                                     <h4> <strong class="text-danger" th:text="${totalPrice}"></strong></h4>
+                                  </div>
+                              </div>
+
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Tiến hành thanh toán</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </div>
+
+          <div class="row ms-5">
+
+
+
+          </div>
+      </div>
+  </div>
+  </form>
+
+
+ <!-- Bắt đầu phần Footer -->
+<footer class="footer-section mt-5">
+    <div class="container relative">
+
+        <div class="sofa-img">
+            <img src="images/sofa.png" alt="Hình ảnh" class="img-fluid">
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="subscription-form">
+                    <h3 class="d-flex align-items-center">
+                        <span class="me-1"><img src="images/envelope-outline.svg" alt="Hình ảnh" class="img-fluid"></span>
+                        <span>Đăng ký nhận bản tin</span>
+                    </h3>
+
+                    <form action="#" class="row g-3">
+                        <div class="col-auto">
+                            <input type="text" class="form-control" placeholder="Nhập tên của bạn">
+                        </div>
+                        <div class="col-auto">
+                            <input type="email" class="form-control" placeholder="Nhập email của bạn">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary">
+                                <span class="fa fa-paper-plane"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-5 mb-5">
+            <div class="col-lg-4">
+                <div class="mb-4 footer-logo-wrap">
+                    <a href="#" class="footer-logo">Furni<span>.</span></a>
+                </div>
+                <p class="mb-4">Chúng tôi cung cấp các sản phẩm nội thất chất lượng với phong cách hiện đại và tiện nghi. Hãy đến với chúng tôi để tìm thấy những sản phẩm phù hợp nhất cho không gian sống của bạn.</p>
+
+                <ul class="list-unstyled custom-social">
+                    <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+                    <li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+                    <li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+                    <li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="row links-wrap">
+                    <div class="col-6 col-sm-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Dịch vụ</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Liên hệ chúng tôi</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Hỗ trợ</a></li>
+                            <li><a href="#">Cơ sở kiến thức</a></li>
+                            <li><a href="#">Chat trực tiếp</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Công việc</a></li>
+                            <li><a href="#">Đội ngũ của chúng tôi</a></li>
+                            <li><a href="#">Lãnh đạo</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Ghế Bắc Âu</a></li>
+                            <li><a href="#">Ghế Kruzo Aero</a></li>
+                            <li><a href="#">Ghế Ergonomic</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-top copyright">
+            <div class="row pt-4">
+                <div class="col-lg-6">
+                    <p class="mb-2 text-center text-lg-start">Bản quyền &copy;<script>document.write(new Date().getFullYear());</script>. Tất cả các quyền được bảo lưu. &mdash; Thiết kế với tình yêu bởi <a href="https://untree.co">Untree.co</a> Phân phối bởi <a href="https://themewagon.com">ThemeWagon</a></p>
+                </div>
+
+                <div class="col-lg-6 text-center text-lg-end">
+                    <ul class="list-unstyled d-inline-flex ms-auto">
+                        <li class="me-4"><a href="#">Điều khoản &amp; Điều kiện</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</footer>
+<!-- Kết thúc phần Footer -->
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/tiny-slider.js"></script>
+<script src="js/custom.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}">
+    <meta name="description" content=""/>
+    <meta name="keywords" content="bootstrap, bootstrap5"/>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/css/tiny-slider.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <title>Furni - Nội thất và Thiết kế Nội thất</title>
+</head>
+
+<body>
+
+<!-- Bắt đầu Phần Đầu/Điều Hướng -->
+<nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Thanh điều hướng Furni">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Furni<span>.</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
+                aria-controls="navbarsFurni" aria-expanded="false" aria-label="Chuyển đổi điều hướng">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsFurni">
+            <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{index}">Trang chủ</a>
+                </li>
+                <li><a class="nav-link" th:href="@{shop1}">Cửa hàng</a></li>
+                <li><a class="nav-link" href="about.html">Giới thiệu</a></li>
+                <li><a class="nav-link" href="services.html">Dịch vụ</a></li>
+                <li><a class="nav-link" href="blog.html">Blog</a></li>
+                <li><a class="nav-link" href="contact.html">Liên hệ</a></li>
+            </ul>
+
+            <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+                <li><a class="nav-link" href="#"><img th:src="@{/images/user.svg}"></a></li>
+                <li><a class="nav-link" th:href="@{/cart}"><img th:src="@{/images/cart.svg}"></a></li>
+            </ul>
+        </div>
+    </div> <!-- Đóng đúng thẻ -->
+</nav>
+<!-- Kết thúc Phần Đầu/Điều Hướng -->
+
+<!-- Bắt đầu Phần Hero -->
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Nội thất Hiện đại <span class="d-block">Studio Thiết kế</span></h1>
+                    <p class="mb-4">Mang đến cho bạn các giải pháp thiết kế nội thất hiện đại, sáng tạo. Nâng tầm
+                        không gian sống của bạn với những sản phẩm độc đáo và chất lượng.</p>
+                    <p><a href="" class="btn btn-secondary me-2">Mua ngay</a><a href="#"
+                                                                                class="btn btn-white-outline">Khám phá</a></p>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-img-wrap">
+                    <img th:src="@{/images/couch.png}" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Kết thúc Phần Hero -->
+
+<!-- Bắt đầu Phần Sản Phẩm -->
+<div class="product-section">
+    <div class="container">
+        <div class="row">
+
+            <!-- Bắt đầu Cột 1 -->
+            <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+                <h2 class="mb-4 section-title">Thiết kế từ chất liệu tuyệt vời.</h2>
+                <p class="mb-4">Chúng tôi tự hào mang đến những sản phẩm nội thất được làm từ chất liệu cao cấp,
+                    thiết kế tinh tế và hiện đại.</p>
+                <p><a href="shop.html" class="btn">Khám phá</a></p>
+            </div>
+
+            <div class="container mt-5">
+                <h1 class="text-center mb-5">Chi Tiết Sản Phẩm</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img th:src="@{'/images/' + ${product.image}}" alt="Product Image">
+                    </div>
+                    <div class="col-md-6">
+                        <h4 th:text="${product.productName}"></h4>
+                        <p>Giá: <span class="text-danger fw-bold" th:text="${product.formattedPrice}"></span> </p>
+                        <p>Mô tả: <span th:text="${product.description}"></span> </p> <!-- Đổi thành chữ thường nếu cần -->
+                        <form th:action="@{/cart/add}" method="post">
+                            <!-- Truyền tham số sản phẩm vào -->
+                            <input type="hidden" name="productId" th:value="${product.productID}" /> <!-- Đảm bảo sử dụng đúng tên tham số productId -->
+                            <input type="hidden" name="quantity" value="1" />
+                            <button class="btn btn-primary">Thêm vào giỏ hàng</button>
+                            <a class="btn btn-primary" th:href="@{/shop}">Quay về cửa hàng</a>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3>Thông Tin Khác</h3>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Tính Năng</th>
+                            <th>Chi Tiết</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Kích Thước</td>
+                            <td>20cm x 30cm</td>
+                        </tr>
+                        <tr>
+                            <td>Trọng Lượng</td>
+                            <td>500g</td>
+                        </tr>
+                        <tr>
+                            <td>Chất Liệu</td>
+                            <td>Nhựa cao cấp</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center py-4 mt-5 bg-light">
+            <p>&copy; 2024 My Website. All Rights Reserved.</p>
+        </footer>
+</body>
+</html>

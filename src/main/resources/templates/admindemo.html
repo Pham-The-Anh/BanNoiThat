@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa; /* Nền chính sáng hơn */
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #343a40; /* Màu tối cho sidebar */
+      color: #fff;
+      position: fixed;
+      width: 250px;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .sidebar h4 {
+      color: #e9ecef;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 10px 20px;
+      margin: 10px 0;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .sidebar a:hover {
+      background-color: #495057; /* Màu nền khi hover */
+    }
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .navbar {
+      background-color: #e9ecef; /* Màu nền xám nhẹ */
+      color: #495057;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 10px 20px;
+      position: relative; /* Để đặt phần đăng xuất ở góc dưới cùng */
+    }
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .navbar-nav .nav-link {
+      color: #495057;
+      margin-right: 15px;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #007bff; /* Màu chữ khi hover */
+    }
+    .navbar-nav .nav-link.logout {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      margin-left: 0;
+      color: #dc3545; /* Màu đỏ cho đăng xuất */
+    }
+    .navbar-nav .nav-link.logout:hover {
+      color: #c82333; /* Màu đỏ đậm khi hover */
+    }
+    .navbar-toggler {
+      border: none;
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 30 30'%3E%3Cpath stroke='currentColor' stroke-width='2' d='M5 15h20M5 9h20M5 21h20'/%3E%3C/svg%3E");
+    }
+    .nav-item .dropdown-menu {
+      background-color: #495057; /* Màu nền dropdown menu */
+    }
+    .nav-item .dropdown-item {
+      color: #fff;
+    }
+    .nav-item .dropdown-item:hover {
+      background-color: #6c757d; /* Màu nền khi hover trên item dropdown */
+    }
+    .tab-content {
+      display: none;
+      border-radius: 8px;
+      border: 1px solid #dee2e6; /* Viền nhẹ */
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .container {
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <h4>Trang Quản Trị</h4>
+  <a href="#" data-target="dashboard" onclick="showContent(event, 'dashboard')"><i class="fas fa-home"></i> Bảng Điều Khiển</a>
+  <a href="#" data-target="users" onclick="showContent(event, 'users')"><i class="fas fa-users"></i> Người Dùng</a>
+  <a href="#" data-target="products" onclick="showContent(event, 'products')"><i class="fas fa-box"></i> Sản Phẩm</a>
+  <a href="#" data-target="reports" onclick="showContent(event, 'reports')"><i class="fas fa-chart-line"></i> Báo Cáo</a>
+  <a href="#" data-target="settings" onclick="showContent(event, 'settings')"><i class="fas fa-cogs"></i> Cài Đặt</a>
+</div>
+
+<div class="content">
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">Trang Quản Trị</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i> Hồ Sơ
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Cài Đặt</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <a class="nav-link logout" href="#" onclick="logout()">
+      <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+    </a>
+  </nav>
+  <div class="container">
+    <div id="dashboard" class="tab-content active">
+      <h1>Bảng Điều Khiển</h1>
+      <p>Chào mừng bạn đến với bảng điều khiển của hệ thống. Tại đây bạn có thể xem các thông tin tổng quan và báo cáo nhanh.</p>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Số Lượng Đơn Hàng</h5>
+              <p class="card-text">500 Đơn hàng đã được xử lý trong tháng này.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Doanh Thu</h5>
+              <p class="card-text">10,000,000 VNĐ đã được ghi nhận trong tháng này.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Người Dùng Mới</h5>
+              <p class="card-text">150 người dùng mới đã đăng ký trong tháng này.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- quản lý người dùng    -->
+    <div id="users" class="tab-content">
+        <div th:replace="users :: userList"></div>
+    </div>
+    <!-- kết thúc quản lý người dùng   -->
+
+    <div id="products" class="tab-content">
+      <h1>Quản Lý Sản Phẩm</h1>
+      <!-- Nội dung quản lý sản phẩm -->
+    </div>
+  </div>
+  <div id="reports" class="tab-content">
+    <h1>Báo Cáo</h1>
+    <!-- Nội dung báo cáo -->
+    <ul>
+      <li><a href="#">Báo Cáo Doanh Thu</a></li>
+      <li><a href="#">Báo Cáo Đơn Hàng</a></li>
+      <li><a href="#">Báo Cáo Người Dùng</a></li>
+    </ul>
+  </div>
+  <div id="settings" class="tab-content">
+    <h1>Cài Đặt</h1>
+    <!-- Nội dung cài đặt -->
+    <form>
+      <div class="mb-3">
+        <label for="siteName" class="form-label">Tên Trang Web</label>
+        <input type="text" class="form-control" id="siteName" value="Trang Quản Trị">
+      </div>
+      <div class="mb-3">
+        <label for="adminEmail" class="form-label">Email Quản Trị</label>
+        <input type="email" class="form-control" id="adminEmail" value="admin@example.com">
+      </div>
+      <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  function showContent(event, targetId) {
+    event.preventDefault();
+    // Hide all tab-content elements
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active');
+    });
+    // Show the selected tab-content
+    document.getElementById(targetId).classList.add('active');
+  }
+
+  // Initialize the default view
+  showContent(new Event('load'), 'dashboard');
+</script>
+</body>
+</html>

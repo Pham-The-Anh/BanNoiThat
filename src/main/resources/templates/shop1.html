@@ -1,0 +1,309 @@
+<!-- /*
+* Bootstrap 5
+* Tên mẫu: Furni
+* Tác giả mẫu: Untree.co
+* Đường dẫn mẫu: https://untree.co/
+* Giấy phép: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}">
+    <meta name="description" content=""/>
+    <meta name="keywords" content="bootstrap, bootstrap5"/>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/css/tiny-slider.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <title>Furni - Nội thất và Thiết kế Nội thất</title>
+    <style>
+        /* Định dạng cho navbar có lớp nav1 */
+        .nav1 .navbar-nav .nav-link {
+            color: #000; /* Màu chữ mặc định */
+            transition: color 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+        }
+
+        .nav1 .navbar-nav .nav-link:hover {
+            color: #fff; /* Màu chữ khi hover */
+            background-color: #466146; /* Màu nền khi hover (xanh lá nhạt) */
+            text-decoration: none; /* Không gạch chân khi hover */
+        }
+
+        .nav1 .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            display: block; /* Hiển thị menu dropdown khi hover */
+        }
+
+        /* Nếu bạn muốn thêm hiệu ứng cho dropdown items */
+        .nav1 .dropdown-menu .dropdown-item {
+            color: #000; /* Màu chữ mặc định cho dropdown items */
+        }
+
+        .nav1 .dropdown-menu .dropdown-item:hover {
+            color: #fff; /* Màu chữ khi hover trên dropdown items */
+            background-color: #466146; /* Màu nền khi hover trên dropdown items (xanh lá nhạt) */
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Bắt đầu Phần Đầu/Điều Hướng -->
+<!-- Bắt đầu Phần Đầu/Điều Hướng -->
+<nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Thanh điều hướng Furni">
+
+    <div class="container">
+        <a class="navbar-brand" th:href="@{index}">Furni<span>.</span></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Chuyển đổi điều hướng">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsFurni">
+            <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item active">
+                    <a class="nav-link"  th:href="@{index}">Trang chủ</a>
+                </li>
+                <li><a class="nav-link" href="/shop1">Cửa hàng</a></li>
+                <li><a class="nav-link" href="about.html">Giới thiệu</a></li>
+                <li><a class="nav-link" href="services.html">Dịch vụ</a></li>
+                <li><a class="nav-link" href="blog.html">Blog</a></li>
+                <li><a class="nav-link" th:href="@{contact}">Liên hệ</a></li>
+            </ul>
+
+            <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:if="${fullname != null}" th:text="'Xin Chào: ' + ${fullname}"></a>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" th:if="${fullnameObj == null}">
+                    <a class="nav-link" href="/dangnhap">
+                        <img src="images/user.svg" alt="Đăng nhập">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/cart}">
+                        <img src="images/cart.svg" alt="Giỏ hàng">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+<!-- Kết thúc Phần Đầu/Điều Hướng -->
+
+<!-- Bắt đầu Phần Hero -->
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Cửa hàng</h1>
+                </div>
+            </div>
+            <div class="col-lg-7">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Kết thúc Phần Hero -->
+
+
+<div class="container mt-3">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary nav1">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/shop1}">Cửa hàng</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/shop}">Doanh mục sản phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">Sản phẩm</a>
+                        <ul class="dropdown-menu">
+                            <li th:each="category : ${categories}">
+                                <a class="dropdown-item" th:href="@{/shop(category=${category.name})}"
+                                   th:text="${category.name}">Category</a>
+                            </li>
+                            <!--                            <li><a class="dropdown-item" th:href="@{/shop(category='Ghế Sofa')}">Ghế sofa</a></li>-->
+                            <!--                            <li><a class="dropdown-item" th:href="@{/shop(category='Giường')}">Giường</a></li>-->
+                            <!--                            <li><a class="dropdown-item" th:href="@{/shop(category='Ghế nhà khách')}">Ghế nhà khách</a>-->
+                            <!--                            </li>-->
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form th:action="@{/shop/search-and-page}" class="d-flex" role="search">
+                    <input class="form-control me-2" name="keywords" th:value="${session.keywords}" type="text"
+                           placeholder="Search"
+                           aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="alert alert-danger" th:if="${succes}" th:text="${succes}"></div>
+<div class="untree_co-section product-section before-footer-section">
+    <div class="container" th:each="entry : ${productsByCategory}">
+        <div class="row">
+            <!-- Bắt đầu Cột 1 -->
+            <h1 class="text-center" th:text="${entry.key}">Tên loại sản phẩm</h1>
+            <div class="col-12 col-md-4 col-lg-3 mb-5" th:each="product : ${entry.value}">
+                <a class="product-item" th:href="@{/shop/{productID}(productID=${product.productID})}">
+                    <img th:src="@{'/images/' + ${product.image}}" class="img-fluid product-thumbnail" alt=""/>
+                    <h3 class="product-title" th:text="${product.productName}"></h3>
+                    <strong class="product-price" th:text="${product.formattedPrice} ">VND</strong>
+                    <span class="icon-cross">
+                        <img src="images/cross.svg" class="img-fluid">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!-- Kết thúc Cột 4 -->
+    </div>
+</div>
+
+
+<!-- Bắt đầu Phần Chân Trang -->
+<footer class="footer-section">
+    <div class="container relative">
+
+        <div class="sofa-img">
+            <img src="images/sofa.png" alt="Image" class="img-fluid">
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="subscription-form">
+                    <h3 class="d-flex align-items-center"><span class="me-1"><img src="images/envelope-outline.svg"
+                                                                                  alt="Image"
+                                                                                  class="img-fluid"></span><span>Đăng ký nhận bản tin</span>
+                    </h3>
+
+                    <form action="#" class="row g-3">
+                        <div class="col-auto">
+                            <input type="text" class="form-control" placeholder="Nhập tên của bạn">
+                        </div>
+                        <div class="col-auto">
+                            <input type="email" class="form-control" placeholder="Nhập email của bạn">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary">
+                                <span class="fa fa-paper-plane"></span>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-5 mb-5">
+            <div class="col-lg-4">
+                <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Furni<span>.</span></a></div>
+                <p class="mb-4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus
+                    malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
+                    Pellentesque habitant</p>
+
+                <ul class="list-unstyled custom-social">
+                    <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+                    <li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+                    <li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+                    <li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="row links-wrap">
+                    <div class="col-6 col-sm-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Dịch vụ</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Hỗ trợ</a></li>
+                            <li><a href="#">Kiến thức</a></li>
+                            <li><a href="#">Câu hỏi thường gặp</a></li>
+                            <li><a href="#">Liên hệ hỗ trợ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Dịch vụ</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Hỗ trợ</a></li>
+                            <li><a href="#">Kiến thức</a></li>
+                            <li><a href="#">Câu hỏi thường gặp</a></li>
+                            <li><a href="#">Liên hệ hỗ trợ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="border-top copyright">
+            <div class="row pt-4">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <p class="mb-2 text-muted">Bản quyền &copy;
+                        <script>document.write(new Date().getFullYear());</script>
+                        . Đã đăng ký bản quyền.
+                    </p>
+                </div>
+
+                <div class="col-lg-6 text-center text-lg-end">
+                    <ul class="list-unstyled d-inline-flex ms-auto">
+                        <li class="me-4"><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</footer>
+<!-- Kết thúc Phần Chân Trang -->
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/tiny-slider.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>
